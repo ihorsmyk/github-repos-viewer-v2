@@ -112,7 +112,6 @@ code {
 }
 
 /*background*/
-
 .background {
   position: fixed;
   top: 0;
@@ -129,6 +128,24 @@ code {
   width: 350px;
   height: 350px;
   opacity: 0.1;
+}
+
+/*loader*/
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.loader__spinner {
+  opacity: 0.9;
+  display: none;
 }
 
 /*items*/

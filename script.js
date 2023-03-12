@@ -1,22 +1,28 @@
 const refs = {
   form: document.querySelector('.header__form'),
-  main: document.querySelector('.main__content'),
+  content: document.querySelector('.content'),
+  loader: document.querySelector('.loader__spinner'),
 };
 
-const fetchRepos = user => {
-  // loader on
-  return fetch(`https://api.github.com/users/${user}/repos`)
-    .then(response => {
+const fetchRepos = async user => {
+  try {
+    loading(true);
+    return await fetch(`https://api.github.com/users/${user}/repos`).then(response => {
       if (!response) throw new Error(response.status);
       return response.json();
-    })
-    .catch(error => error);
-  //    .finally()  loader off
+    });
+  } catch (error) {
+    console.log(error.message);
+  } finally {
+    loading(false);
+  }
 };
 
 refs.form.addEventListener('submit', e => {
+  refs.loader.style.display = 'block';
+
   e.preventDefault();
-  refs.main.innerHTML = '';
+  refs.content.innerHTML = '';
   const username = e.target.elements[1].value.trim();
   fetchRepos(username).then(data => filterProperties(data));
   e.target.reset();
@@ -34,7 +40,7 @@ function filterProperties(arrayRepos) {
 function createRepoList(repoList) {
   let ul = document.createElement('ul');
   repoList.forEach(el => ul.append(createRepoItem(el)));
-  refs.main.append(ul);
+  refs.content.append(ul);
 }
 
 function createRepoItem(repo) {
@@ -54,4 +60,16 @@ function createRepoItem(repo) {
       </p>`
   );
   return li;
+}
+
+function loading(on) {
+  if (on) {
+    refs.loader.style.display = 'block';
+    let y = 0;
+    setInterval(() => {
+      refs.loader.style.transform = `rotate(${y++}deg)`;
+    }, 13);
+  } else {
+    refs.loader.style.display = 'none';
+  }
 }
