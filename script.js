@@ -19,8 +19,6 @@ const fetchRepos = async user => {
 };
 
 refs.form.addEventListener('submit', e => {
-  refs.loader.style.display = 'block';
-
   e.preventDefault();
   refs.content.innerHTML = '';
   const username = e.target.elements[1].value.trim();
