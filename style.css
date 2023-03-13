@@ -144,7 +144,7 @@ code {
 }
 
 .loader__spinner {
-  opacity: 0.9;
+  opacity: 0.6;
   display: none;
 }
 

@@ -61,12 +61,12 @@ function createRepoItem(repo) {
 }
 
 function loading(on) {
+  let y = 0;
   if (on) {
     refs.loader.style.display = 'block';
-    let y = 0;
     setInterval(() => {
       refs.loader.style.transform = `rotate(${y++}deg)`;
-    }, 13);
+    }, 40);
   } else {
     refs.loader.style.display = 'none';
   }
