@@ -1,7 +1,7 @@
 const refs = {
   form: document.querySelector('.header__form'),
   content: document.querySelector('.content'),
-  loader: document.querySelector('.loader__spinner'),
+  loader: document.querySelector('.loader__lds'),
 };
 
 const fetchRepos = async user => {
@@ -61,13 +61,6 @@ function createRepoItem(repo) {
 }
 
 function loading(on) {
-  let y = 0;
-  if (on) {
-    refs.loader.style.display = 'block';
-    setInterval(() => {
-      refs.loader.style.transform = `rotate(${y++}deg)`;
-    }, 40);
-  } else {
-    refs.loader.style.display = 'none';
-  }
+  if (on) refs.loader.style.display = 'inline-block';
+  else refs.loader.style.display = 'none';
 }
